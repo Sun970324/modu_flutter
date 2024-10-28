@@ -16,7 +16,7 @@ class CartItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 0),
       decoration: BoxDecoration(
         color: AppColors.moduRed,
         borderRadius: BorderRadius.circular(12),
@@ -27,11 +27,11 @@ class CartItemView extends StatelessWidget {
         children: [
           Text(
             cartItem.productName,
-            style: AppText.cartItemText,
+            style: const TextStyle(fontSize: 12, color: Colors.white),
           ),
           Text(
             '${cartItem.singlePrice}원',
-            style: AppText.cartItemText,
+            style: const TextStyle(fontSize: 12, color: Colors.white),
           ),
           Row(
             children: [
@@ -58,6 +58,16 @@ class CartItemView extends StatelessWidget {
               Text(
                 '개',
                 style: AppText.cartItemText,
+              ),
+              TextButton(
+                onPressed: () {
+                  Provider.of<CartProvider>(context, listen: false)
+                      .removeItem(index);
+                },
+                child: const Text(
+                  '삭제',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ],
           ),

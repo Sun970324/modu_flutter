@@ -1,5 +1,7 @@
 PODS:
   - Flutter (1.0.0)
+  - permission_handler_apple (9.3.0):
+    - Flutter
   - speech_to_text (0.0.1):
     - Flutter
     - Try
@@ -7,6 +9,7 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - speech_to_text (from `.symlinks/plugins/speech_to_text/ios`)
 
 SPEC REPOS:
@@ -16,11 +19,14 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
   speech_to_text:
     :path: ".symlinks/plugins/speech_to_text/ios"
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
   speech_to_text: b43a7d99aef037bd758ed8e45d79bbac035d2dfe
   Try: 5ef669ae832617b3cee58cb2c6f99fb767a4ff96
 

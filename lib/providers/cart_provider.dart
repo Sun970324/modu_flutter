@@ -2,16 +2,21 @@ import 'package:final_proj_flutter/models/cart_item_model.dart';
 import 'package:flutter/foundation.dart';
 
 class CartProvider with ChangeNotifier {
-  static final CartProvider _instance = CartProvider._internal();
-  factory CartProvider() => _instance;
-  CartProvider._internal();
-
   final List<CartItemModel> _cartItems = [];
 
   List<CartItemModel> get cartItems => _cartItems;
 
   void addItem(CartItemModel item) {
-    _cartItems.add(item);
+    bool isExist = false;
+    for (var i = 0; i < _cartItems.length; i++) {
+      if (_cartItems[i].productName == item.productName) {
+        isExist = true;
+        _cartItems[i].quantity++;
+      }
+    }
+    if (!isExist) {
+      _cartItems.add(item);
+    }
     notifyListeners();
   }
 
