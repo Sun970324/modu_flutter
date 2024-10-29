@@ -1,7 +1,7 @@
 // 메뉴 전체화면 페이지
 import 'package:final_proj_flutter/models/cart_item_model.dart';
 import 'package:final_proj_flutter/models/menu_model.dart';
-import 'package:final_proj_flutter/providers/cart_provider.dart';
+import 'package:final_proj_flutter/providers/chat_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +11,7 @@ class MenuDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CartProvider cartProvider = Provider.of<CartProvider>(context);
+    ChatProvider chatProvider = Provider.of<ChatProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(item.name),
@@ -32,7 +32,7 @@ class MenuDetail extends StatelessWidget {
               Text('세트: ${item.priceSet}원'),
               Text(item.description),
               FloatingActionButton(
-                onPressed: () => cartProvider.addItem(
+                onPressed: () => chatProvider.addItem(
                   CartItemModel(
                       productName: item.name,
                       singlePrice: item.priceSingle,

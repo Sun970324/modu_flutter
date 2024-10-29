@@ -7,6 +7,8 @@ class CartProvider with ChangeNotifier {
   List<CartItemModel> get cartItems => _cartItems;
 
   void addItem(CartItemModel item) {
+    print('additem실행');
+    print(item.productName);
     bool isExist = false;
     for (var i = 0; i < _cartItems.length; i++) {
       if (_cartItems[i].productName == item.productName) {

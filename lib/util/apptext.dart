@@ -71,9 +71,9 @@ import 'appcolors.dart';
 // }
 
 class AppText {
-  static TextStyle llmText = TextStyle(
+  static TextStyle llmText = const TextStyle(
     fontFamily: 'NanumSquareNeo',
-    fontSize: 14.sp,
+    fontSize: 16,
     color: AppColors.darkText,
     fontWeight: FontWeight.w600,
   );

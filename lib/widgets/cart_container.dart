@@ -1,5 +1,5 @@
 // 장바구니 표시 컨테이너
-import 'package:final_proj_flutter/providers/cart_provider.dart';
+import 'package:final_proj_flutter/providers/chat_provider.dart';
 import 'package:final_proj_flutter/util/appcolors.dart';
 import 'package:final_proj_flutter/util/apptext.dart';
 import 'package:final_proj_flutter/widgets/cart_item_view.dart';
@@ -27,7 +27,7 @@ class CartContainer extends StatelessWidget {
           ),
         ],
       ),
-      child: Consumer<CartProvider>(
+      child: Consumer<ChatProvider>(
         builder: (context, provider, child) {
           if (provider.cartItems.isEmpty) {
             return Center(

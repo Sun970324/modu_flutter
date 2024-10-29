@@ -1,6 +1,6 @@
 // 선택된 내용 라인 구성 (장바구니 표시 컨테이너 구성요소)
 import 'package:final_proj_flutter/models/cart_item_model.dart';
-import 'package:final_proj_flutter/providers/cart_provider.dart';
+import 'package:final_proj_flutter/providers/chat_provider.dart';
 import 'package:final_proj_flutter/util/appcolors.dart';
 import 'package:final_proj_flutter/util/apptext.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +39,7 @@ class CartItemView extends StatelessWidget {
                 icon: const Icon(Icons.remove_circle_outline),
                 color: AppColors.lightText,
                 onPressed: () {
-                  Provider.of<CartProvider>(context, listen: false)
+                  Provider.of<ChatProvider>(context, listen: false)
                       .decreaseQuantity(index);
                 },
               ),
@@ -51,7 +51,7 @@ class CartItemView extends StatelessWidget {
                 icon: const Icon(Icons.add_circle_outline),
                 color: AppColors.lightText,
                 onPressed: () {
-                  Provider.of<CartProvider>(context, listen: false)
+                  Provider.of<ChatProvider>(context, listen: false)
                       .increaseQuantity(index);
                 },
               ),
@@ -61,7 +61,7 @@ class CartItemView extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Provider.of<CartProvider>(context, listen: false)
+                  Provider.of<ChatProvider>(context, listen: false)
                       .removeItem(index);
                 },
                 child: const Text(

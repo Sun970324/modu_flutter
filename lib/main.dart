@@ -1,3 +1,4 @@
+import 'package:final_proj_flutter/providers/chat_provider.dart';
 import 'package:final_proj_flutter/screens/menu_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,7 +20,8 @@ class ModuApp extends StatelessWidget {
       builder: (context, child) {
         return MultiProvider(
           providers: [
-            ChangeNotifierProvider(create: (context) => CartProvider()),
+            // ChangeNotifierProvider(create: (context) => CartProvider()),
+            ChangeNotifierProvider(create: (context) => ChatProvider()),
           ],
           child: const MaterialApp(
             title: 'Modu App',

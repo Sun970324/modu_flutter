@@ -1,14 +1,13 @@
 import 'dart:async';
 
+import 'package:final_proj_flutter/providers/chat_provider.dart';
 import 'package:final_proj_flutter/screens/cart_screen.dart';
 import 'package:final_proj_flutter/util/appcolors.dart';
 import 'package:final_proj_flutter/util/apptext.dart';
 import 'package:final_proj_flutter/widgets/basic_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
-
-enum ButtonState { buttonDefault, inUse, disabled }
 
 class ButtonBox extends StatefulWidget {
   const ButtonBox({super.key});
@@ -18,7 +17,6 @@ class ButtonBox extends StatefulWidget {
 }
 
 class _ButtonBoxState extends State<ButtonBox> {
-  bool _isListeningLoading = false;
   bool _isListening = false;
   Timer? _timer;
   final stt.SpeechToText _speechToText = stt.SpeechToText();
@@ -28,16 +26,15 @@ class _ButtonBoxState extends State<ButtonBox> {
     if (available) {
       setState(() {
         _isListening = true;
-        _isListeningLoading = true;
       });
       _speechToText.listen(
-        onResult: (result) {
+        onResult: (result) async {
           if (result.finalResult) {
             print(result.recognizedWords);
-            print(result.finalResult);
+            Provider.of<ChatProvider>(context, listen: false)
+                .sendMessage(result.recognizedWords);
             setState(() {
               _isListening = false;
-              _isListeningLoading = false;
             });
           }
         },
@@ -50,7 +47,6 @@ class _ButtonBoxState extends State<ButtonBox> {
     } else {
       setState(() {
         _isListening = false;
-        _isListeningLoading = false;
       });
     }
   }
@@ -65,6 +61,7 @@ class _ButtonBoxState extends State<ButtonBox> {
 
   @override
   Widget build(BuildContext context) {
+    ChatProvider chatProvider = Provider.of<ChatProvider>(context);
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: const BoxDecoration(
@@ -84,13 +81,7 @@ class _ButtonBoxState extends State<ButtonBox> {
         mainAxisSize: MainAxisSize.min,
         children: [
           ElevatedButton(
-            onPressed: () {
-              if (_isListening) {
-                _stopListening();
-              } else {
-                _startListening();
-              }
-            },
+            onPressed: _isListening ? _stopListening : _startListening,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blueAccent,
               padding: const EdgeInsets.symmetric(vertical: 15),
@@ -107,14 +98,11 @@ class _ButtonBoxState extends State<ButtonBox> {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          // FloatingActionButton(
-          //   onPressed: _isListening ? _stopListening : _startListening,
-          //   child: BasicButton(
-          //       label: _isListening ? '말 중지' : '말하기',
-          //       textStyle: AppText.buttonText),
-          // ),
           const SizedBox(width: 24),
-          BasicButton(label: '메뉴 다 보기', textStyle: AppText.buttonText),
+          FloatingActionButton(
+              onPressed: () => chatProvider.sendMessage('불고기버거 하나 결제'),
+              child:
+                  BasicButton(label: '메뉴 다 보기', textStyle: AppText.buttonText)),
           const SizedBox(width: 24),
           FloatingActionButton(
             heroTag: 'cart',
